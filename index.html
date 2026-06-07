@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="description" content="HTML5/CSS3/JavaScriptで構築された、美しくモダンなネオン調のブラウザテトリスゲームです。">
+  <title>NEON TETRIS - プレミアム・テトリス</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Audio Toggle Button -->
+  <button id="sound-btn" class="sound-toggle" title="音量切替" aria-label="Toggle Sound">
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" id="sound-icon">
+      <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+      <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+    </svg>
+  </button>
+
+  <div class="app-container">
+    <header>
+      <h1>Neon Tetris</h1>
+      <p class="subtitle">Fall into the Cyber Grid</p>
+    </header>
+
+    <div class="game-layout">
+      <!-- Left Panel: HOLD area -->
+      <div class="side-panel">
+        <div class="panel">
+          <h2 class="panel-title">Hold</h2>
+          <canvas id="hold-canvas" width="120" height="120"></canvas>
+        </div>
+        
+        <!-- Stats Panel -->
+        <div class="panel">
+          <h2 class="panel-title">Stats</h2>
+          <div class="stat-box">
+            <div class="stat-label">Score</div>
+            <div id="score" class="stat-value highlight">000000</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-label">Level</div>
+            <div id="level" class="stat-value">1</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-label">Lines</div>
+            <div id="lines" class="stat-value">0</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Center Panel: The Game board -->
+      <div id="board-wrapper" class="game-board-wrapper">
+        <canvas id="game-canvas" width="300" height="600"></canvas>
+        
+        <!-- Screen Overlay (Start Screen) -->
+        <div id="start-screen" class="screen-overlay visible">
+          <div class="overlay-title">Neon Tetris</div>
+          <div class="overlay-desc">Press Start to Enter the Cyber Grid</div>
+          <button id="start-btn" class="btn">Start Game</button>
+        </div>
+
+        <!-- Screen Overlay (Pause Screen) -->
+        <div id="pause-screen" class="screen-overlay">
+          <div class="overlay-title">Paused</div>
+          <div class="overlay-desc">Game is currently paused</div>
+          <button id="resume-btn" class="btn">Resume</button>
+        </div>
+
+        <!-- Screen Overlay (Game Over Screen) -->
+        <div id="gameover-screen" class="screen-overlay">
+          <div class="overlay-title" style="color: #ff3838; text-shadow: 0 0 15px rgba(255, 56, 56, 0.4);">Game Over</div>
+          <div class="overlay-desc">Final Score: <span id="final-score" style="color: #00f2fe; font-weight: bold;">0</span></div>
+          <button id="restart-btn" class="btn">Play Again</button>
+        </div>
+      </div>
+
+      <!-- Right Panel: NEXT area & Controls -->
+      <div class="side-panel">
+        <div class="panel">
+          <h2 class="panel-title">Next</h2>
+          <canvas id="next-canvas" width="120" height="300"></canvas>
+        </div>
+
+        <div class="panel controls-panel">
+          <h2 class="panel-title">Controls</h2>
+          <div class="controls-guide">
+            <div><span>Move Left</span><span class="key">←</span></div>
+            <div><span>Move Right</span><span class="key">→</span></div>
+            <div><span>Soft Drop</span><span class="key">↓</span></div>
+            <div><span>Hard Drop</span><span class="key">Space</span></div>
+            <div><span>Rotate Right</span><span class="key">↑</span></div>
+            <div><span>Rotate Left</span><span class="key">Z</span></div>
+            <div><span>Hold Piece</span><span class="key">C / Shift</span></div>
+            <div><span>Pause Game</span><span class="key">P / Esc</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Touch controls for mobile -->
+    <div class="mobile-controls">
+      <button id="m-left" class="control-btn" aria-label="Move Left">←</button>
+      <button id="m-down" class="control-btn" aria-label="Soft Drop">↓</button>
+      <button id="m-right" class="control-btn" aria-label="Move Right">→</button>
+      <button id="m-rot" class="control-btn" aria-label="Rotate Right">↻</button>
+      <button id="m-hold" class="control-btn" aria-label="Hold">HOLD</button>
+      <button id="m-drop" class="control-btn double-width" aria-label="Hard Drop" style="grid-column: span 5;">HARD DROP</button>
+    </div>
+  </div>
+
+  <script type="module" src="app.js"></script>
+</body>
+</html>
